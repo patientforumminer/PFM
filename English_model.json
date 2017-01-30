@@ -1,0 +1,108 @@
+[{
+  "level": "sentence",
+  "language": "English",
+  "comment": "English sentence model trained on crowd-sourced GIST FB summaries",
+  "date": "2016-10-25",
+  "model": {
+    "Intercept": {
+      "beta": "0.582",
+      "p": "0.000"
+    },
+    "abspos_post": {
+      "beta": "-0.080",
+      "p": "0.000"
+    },
+    "abspos_sent": {
+      "beta": "-0.019",
+      "p": "0.195"
+    },
+    "cosinesimwthread_sent": {
+      "beta": "-0.040",
+      "p": "0.043"
+    },
+    "cosinesimwtitle_sent": {
+      "beta": "0.057",
+      "p": "0.001"
+    },
+    "wordcount": {
+      "beta": "0.571",
+      "p": "0.000"
+    },
+    "ttr": {
+      "beta": "0.025",
+      "p": "0.443"
+    },
+    "relpunctcount": {
+      "beta": "-0.038",
+      "p": "0.113"
+    },
+    "avgwordlength": {
+      "beta": "0.080",
+      "p": "0.000"
+    },
+    "relauthorcountsinthread": {
+      "beta": "-0.017",
+      "p": "0.239"
+    }
+  }
+},
+{
+  "level": "post",
+  "language": "Dutch",
+  "comment": "Dutch post-level model trained on crowd-sourced Viva forum summaries (because we don't have an English post-level model)",  
+  "date": "2016-10-26",
+  "model": {
+    "Intercept": {
+      "beta": 2.45595,
+      "p": 0
+    },
+    "abspos": {
+      "beta": -0.69456,
+      "p": 0
+    },
+    "relpos": {
+      "beta": -0.17991,
+      "p": 0.012025
+    },
+    "noresponses": {
+      "beta": -0.11507,
+      "p": 0.000686
+    },
+    "cosinesimwthread": {
+      "beta": 0.32817,
+      "p": 0
+    },
+    "cosinesimwtitle": {
+      "beta": 0.13588,
+      "p": 0.000117
+    },
+    "wordcount": {
+      "beta": -1.44997,
+      "p": 0
+    },
+    "uniquewordcount": {
+      "beta": 1.90478,
+      "p": 0
+    },
+    "ttr": {
+      "beta": -0.38033,
+      "p": 0
+    },
+    "relpunctcount": {
+      "beta": -0.12664,
+      "p": 0.001541
+    },
+    "avgwordlength": {
+      "beta": 0.18753,
+      "p": 0
+    },
+    "avgsentlength": {
+      "beta": -0.01406,
+      "p": 0.728958
+    },
+    "relauthorcountsinthread": {
+      "beta": -0.11927,
+      "p": 0.000476
+    }
+  }
+}]

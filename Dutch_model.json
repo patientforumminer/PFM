@@ -1,0 +1,109 @@
+[{
+  "level": "sentence",
+  "language": "Dutch",
+  "comment": "Dutch sentence model trained on expert GIST NL summaries",  
+  "date": "2016-10-25",
+  "model": {
+    "Intercept": {
+      "beta": 0.49513,
+      "p": 0
+    },
+    "abspos_post": {
+      "beta": -0.01592,
+      "p": 0.2263
+    },
+    "abspos_sent": {
+      "beta": 0.08424,
+      "p": 0
+    },
+    "cosinesimwthread_sent": {
+      "beta": -0.05424,
+      "p": 0.0039
+    },
+    "cosinesimwtitle_sent": {
+      "beta": -0.01257,
+      "p": 0.3812
+    },
+    "wordcount": {
+      "beta": 0.54176,
+      "p": 0
+    },
+    "ttr": {
+      "beta": -0.04325,
+      "p": 0.0317
+    },
+    "relpunctcount": {
+      "beta": -0.05695,
+      "p": 0
+    },
+    "avgwordlength": {
+      "beta": 0.03144,
+      "p": 0.0600
+    },
+    "relauthorcountsinthread": {
+      "beta": 0.16316,
+      "p": 0
+    }
+  }
+},
+{
+  "level": "post",
+  "language": "Dutch",
+  "comment": "Dutch post-level model trained on crowd-sourced Viva forum summaries",
+  "date": "2016-10-26",
+  "model": {
+    "Intercept": {
+      "beta": 2.45595,
+      "p": 0
+    },
+    "abspos": {
+      "beta": -0.69456,
+      "p": 0
+    },
+    "relpos": {
+      "beta": -0.17991,
+      "p": 0.012025
+    },
+    "noresponses": {
+      "beta": -0.11507,
+      "p": 0.000686
+    },
+    "cosinesimwthread": {
+      "beta": 0.32817,
+      "p": 0
+    },
+    "cosinesimwtitle": {
+      "beta": 0.13588,
+      "p": 0.000117
+    },
+    "wordcount": {
+      "beta": -1.44997,
+      "p": 0
+    },
+    "uniquewordcount": {
+      "beta": 1.90478,
+      "p": 0
+    },
+    "ttr": {
+      "beta": -0.38033,
+      "p": 0
+    },
+    "relpunctcount": {
+      "beta": -0.12664,
+      "p": 0.001541
+    },
+    "avgwordlength": {
+      "beta": 0.18753,
+      "p": 0
+    },
+    "avgsentlength": {
+      "beta": -0.01406,
+      "p": 0.728958
+    },
+    "relauthorcountsinthread": {
+      "beta": -0.11927,
+      "p": 0.000476
+    }
+  }
+}
+]
