@@ -1,10 +1,11 @@
 # The Patient Forum Miner
 
-The Patient Forum Miner is a system for analyzing online patient forum posts with advanced text mining techniques. It has been developed by TNO (http://www.tno.nl) and the Radboud Universiteit (http://www.ru.nl), based on a grant by the SIDN Fund (https://www.sidnfonds.nl/excerpt/), for the purpose of analyzing cancer patient forum data. The implemented text mining facilities address (bio)medical concept tagging in raw texts using UMLS and other thesauri (including DBPedia), and automated summarization. The systems offers explorative search via a graphical GUI (displaying co-occurrence relations between detected concepts in the forum posts), and contains a summary browser that allows for zooming in or out on forum threads.
+The Patient Forum Miner is a system for analyzing online patient forum posts with advanced text mining techniques. It has been developed by TNO (http://www.tno.nl) and the Radboud Universiteit (http://www.ru.nl), based on a grant by the SIDN Fund (https://www.sidnfonds.nl/excerpt/), for the purpose of analyzing cancer patient forum data. The implemented text mining facilities address (bio)medical concept tagging in raw texts using UMLS and other thesauri (including DBPedia), and automated summarization. The systems offers explorative search via a graphical GUI (displaying co-occurrence relations between detected concepts in the forum posts), and contains a summary browser that allows for zooming in or out on forum threads. All code runs in Docker containers.
 
 The code base in this repo does not include patient forum data, which is subject to privacy regulations. Please contact patientforumminer@gmail.com for any questions about this system.
 
 ## Entity tagging pipeline
+### Description follows shortly
 
 ## Summarization module
 
@@ -34,3 +35,4 @@ python3 combine_threads.py viva_summarized_threads viva_forum_latest_summarized.
 The runtime of the script is linear with the number of sentences. The function that costs the most time is the calculation of the cosine similarities. On average, feature extraction and summarization together takes 1.5 second per thread.
 
 ## GUI
+### Description follows shortly
