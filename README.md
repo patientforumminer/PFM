@@ -2,7 +2,7 @@
 
 The Patient Forum Miner is a system for analyzing online patient forum posts with advanced text mining techniques. It has been developed by TNO (http://www.tno.nl/en) and the Radboud University (http://www.ru.nl/english), based on a grant by the SIDN Fund (https://www.sidnfonds.nl/excerpt/), for the purpose of analyzing cancer patient forum data. The implemented text mining facilities address (bio)medical concept tagging in raw texts using UMLS and other thesauri (including DBPedia), and automated summarization. The system offers explorative search via a graphical GUI (displaying co-occurrence relations between detected concepts in the forum posts), and contains a summary browser that allows for zooming in on the gist of a forum thread. All code runs in Docker containers.
 
-The code base in this repo does not include patient forum data, which is subject to privacy regulations. Please contact patientforumminer@gmail.com with any questions about this system, or possibilities for cooperation.
+The code base in this repo does not include patient forum data, which is subject to privacy regulations. Please contact patientforumminer@gmail.com with any questions about this system, or for possibilities for cooperation.
 
 ## Entity tagging pipeline
 #### Description follows shortly
