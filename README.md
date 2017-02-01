@@ -9,7 +9,7 @@ The code base in this repo does not include patient forum data, which is subject
 
 ## Summarization module
 
-The create_summaries_for_unseen_data_TNO.py script summarizes all threads retrieved for a query. It reads the json output of the semantic search engine, applies two extractive summarization models (linear model for post selection and linear model for sentence selection), and prints json output.
+The script create_summaries_for_unseen_data_TNO.py summarizes all threads retrieved for a query. It reads the json output of the semantic search engine, applies two extractive summarization models (linear model for post selection and linear model for sentence selection), and prints json output.
 
 ```
 python3 create_summary_for_unseen_data_TNO.py example_query_result_full_threads_improved.json example_query_result_full_threads.summary.json Dutch_model.json
