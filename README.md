@@ -4,10 +4,11 @@ The Patient Forum Miner is a system for analyzing online patient forum posts wit
 
 The code base in this repo does not include patient forum data, which is subject to privacy regulations. Please contact patientforumminer@gmail.com for any questions about this system.
 
+## Entity tagging pipeline
 
-## Summarization module: create_summaries_for_unseen_data_TNO.py
+## Summarization module
 
-This script summarizes all threads retrieved for a query. It reads the json output of the semantic search engine, applies two extractive summarization models (linear model for post selection and linear model for sentence selection), and prints json output.
+The create_summaries_for_unseen_data_TNO.py script summarizes all threads retrieved for a query. It reads the json output of the semantic search engine, applies two extractive summarization models (linear model for post selection and linear model for sentence selection), and prints json output.
 
 ```
 python3 create_summary_for_unseen_data_TNO.py example_query_result_full_threads_improved.json example_query_result_full_threads.summary.json Dutch_model.json
@@ -31,3 +32,5 @@ python3 combine_threads.py viva_summarized_threads viva_forum_latest_summarized.
  
 
 The runtime of the script is linear with the number of sentences. The function that costs the most time is the calculation of the cosine similarities. On average, feature extraction and summarization together takes 1.5 second per thread.
+
+## GUI
