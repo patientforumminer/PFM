@@ -5,7 +5,7 @@ The Patient Forum Miner is a system for analyzing online patient forum posts wit
 The code base in this repo does not include patient forum data, which is subject to privacy regulations. Please contact patientforumminer@gmail.com for any questions about this system.
 
 
-## create_summaries_for_unseen_data_TNO.py
+## Summarization module: create_summaries_for_unseen_data_TNO.py
 
 This script summarizes all threads retrieved for a query. It reads the json output of the semantic search engine, applies two extractive summarization models (linear model for post selection and linear model for sentence selection), and prints json output.
 
