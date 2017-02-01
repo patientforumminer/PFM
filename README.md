@@ -1,4 +1,10 @@
 # PFM - patient forum miner
+
+The Patient Forum Miner is a system for analyzing online patient forum posts with advanced text mining techniques. It has been developed by TNO (http://www.tno.nl) and the Radboud Universiteit (http://www.ru.nl), based on a grant by the SIDN Fund (https://www.sidnfonds.nl/excerpt/), for the purpose of analyzing cancer patient forum data. The implemented text mining facilities address (bio)medical concept tagging in raw texts using UMLS and other thesauri (including DBPedia), and automated summarization. The systems allows for explorative search via a graphical GUI (displaying co-occurrence relations between detected concepts in the forum posts), and a summary browser that allows for zooming in or out on forum threads.
+
+The code base in this repo does not include patient forum data, which is subject to privacy regulations. Please contact patientforumminer@gmail.com for any questions about this system.
+
+
 ## create_summaries_for_unseen_data_TNO.py
 
 This script summarizes all threads retrieved for a query. It reads the json output of the semantic search engine, applies two extractive summarization models (linear model for post selection and linear model for sentence selection), and prints json output.
