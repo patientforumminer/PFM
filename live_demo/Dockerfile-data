@@ -1,0 +1,8 @@
+FROM python:2.7
+ADD . /live_demo
+WORKDIR live_demo
+RUN pip install elasticsearch
+RUN pip install ijson
+
+# Fill database
+CMD python ./import_json_into_elasticsearch_ijson_mcstructure.py ./gistsearch/data/directory/latest_summarized.json data

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+#queryDIV {
+	position: absolute;
+	left: 5px;
+	top: 5px;
+  height: 100px;
+	width: 500px;
+	background-color: #dddddd;
+  /*border-style: solid;*/
+}
+
+#graphDIV {
+	position: absolute;
+	left: 5px;
+	top: 102px;
+  bottom: 150px;
+	width: 500px;
+	background-color: #dddddd;
+  /*border-style: solid;*/
+}
+
+#categoryDIV {
+	position: absolute;
+	left: 5px;
+	height: 140px;
+	bottom: 5px;
+	width: 500px;
+	background-color: #dddddd;
+}
+
+#messageDIV {
+	position: absolute;;
+	left: 510px;
+	bottom: 5px;
+	right: 5px;
+	top: 5px;
+	background-color: #ffffff; /*#dddddd;*/
+	overflow: auto;
+	/*border-style: solid;*/
+}
+
+.messageText {
+	font-family: "Arial", sans-serif;
+	font-size: 13px;
+}
+
+</style>
+<body>
+
+<div id="queryDIV">
+  <input type="text" id="queryINPUT">
+  <button onclick="searchButtonClicked(true)">Search</button> <!-- true: do expand query -->
+	<button onclick="searchButtonClicked(false)">Resend</button> <!-- false: do not expand query -->
+	<div id="queryWordsDIV"></div>
+
+</div>
+<div id="graphDIV"></div>
+<div id="categoryDIV"></div>
+<div id="messageDIV"></div>
+
+<script src="lib/d3.min.js"></script>
+<script src="lib/jquery-2.1.4.min.js"></script>
+<script src="js/server.js"></script>
+<script src="js/graph.js"></script>
+<script src="js/search.js"></script>
+<script src="js/message.js"></script>
+<script src="js/categories.js"></script>
+<script src="js/query.js"></script>
+
+<script>
+
+$(window).resize(updateGraphSize);
+
+var zoom = d3.behavior.zoom()
+    .scaleExtent([0.1, 10])
+    .on("zoom", zoomed);
+
+var drag = d3.behavior.drag()
+    .origin(function(d) { return d; })
+    .on("dragstart", dragstarted)
+    .on("drag", dragged)
+    .on("dragend", dragended);
+
+var zoomAndPanG = d3.select("#graphDIV")
+    .append("svg")
+    .attr("width", "100%")
+    .attr("height", "100%")
+  .append("g")
+		.attr("id","zoomAndPanG")
+		.call(zoom);
+
+zoomAndPanG
+    .append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .style("fill", "none")
+    .style("pointer-events", "all");
+
+var graphG = zoomAndPanG.append("g"); //in this group we add the graph's nodes and links
+
+initGraph(graphG);
+updateGraphSize();
+
+function updateGraphSize() {
+	setGraphSize(zoomAndPanG.node().getBBox().width, zoomAndPanG.node().getBBox().height);
+}
+
+function zoomed() {
+  graphG.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  updateZoomLevel(d3.event.scale);
+}
+
+function dragstarted(d) {
+  d3.event.sourceEvent.stopPropagation();
+  d3.select(this).classed("dragging", true);
+}
+
+function dragged(d) {
+  d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+}
+
+function dragended(d) {
+  d3.select(this).classed("dragging", false);
+}
+
+function searchButtonClicked(expand) {
+	var keywordString = $("#queryINPUT").val();
+	search(keywordString, expand, function(result) {
+		console.log("result",result);
+		queryWords = result.queryWords;
+		showQueryWords(); //defined in query.js
+		messages = result.messages;
+		entityCounts = getEntityCounts(messages); //defined in message.js, used to size the graph's nodes
+		createGraph(result.graph); //
+		drawMessages();
+		initCategoryMenu(); //in categories.js
+	})
+}
+
+</script>

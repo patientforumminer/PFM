@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+html, body
+{
+    height: 100%;
+		overflow: hidden;
+    font-family: "verdana";
+  	font-size: 12px;
+}
+
+#leftColumnDIV {
+	position: absolute;
+	height: 100%;
+	width: 500px;
+	margin: 5px;
+	background-color: #dddddd;
+}
+
+#queryDIV {
+	position: absolute;
+	top: 5px;
+	padding: 10px;
+        width: 100%;
+  /* border-style: solid; */
+}
+
+#expandedSearchDIV {
+  visibility: hidden;
+	margin: 10px;
+}
+
+#graphDIV {
+	position: absolute;
+	top: 400px;
+	bottom:300px;
+	/* top and bottom is set when the size of the other DIVs is known */
+	width: 100%;
+	/* border-style: solid; */
+}
+
+#categoryDIV {
+	position: absolute;
+	height: 140px;
+	bottom: 5px;
+	width: 100%;
+	/* border-style: solid; */
+}
+
+#messageDIV {
+	position: absolute;
+	left: 515px;
+	bottom: 5px;
+	right: 5px;
+	top: 65px;
+	background-color: #ffffff; /*#dddddd;*/
+	overflow: auto;
+	/*border-style: solid;*/
+  padding: 10px;
+}
+
+.messageBlock {
+  font-family: "Arial", sans-serif;
+	font-size: 13px;
+  margin-bottom: 15px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+}
+
+.messageThreadStart {
+  padding: 10px;
+}
+
+.messageComment {
+  padding: 5px;
+  padding-left: 5px;
+  margin-bottom: 5px;
+}
+
+.messageCommentSection {
+  background-color: #eeeeee;
+  margin-left: 35px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  padding: 6px;
+}
+
+.messageHeader {
+  margin-bottom: 5px;
+  font-size: 8pt;
+}
+
+.threadHeaderTitel {
+  display: inline-block;
+  margin-right: 30px;
+  font-size: 16pt;
+  font-weight: bold;
+  padding: 4pt;
+}
+
+#logos {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+
+#slider {
+  position: absolute;
+  top: 20px;
+  left: 530px;
+}
+
+#summarySlider {
+  width: 180px;
+}
+</style>
+<body>
+
+
+<div id="leftColumnDIV">
+	<div id="queryDIV">
+	  <input type="text" id="queryINPUT" style="width:250px">
+    <span>in</span>
+    <select id="corpusSelect"></select>
+	  <button id="searchBTN" onclick="searchButtonClicked(true)">Search</button> <!-- true: do expand query -->
+		<div id="expandedSearchDIV">
+			<div>Searched with these words (you can deselect non-relevant words):</div>
+			<div id="queryWordsDIV"></div>
+			<button onclick="searchButtonClicked(false)">Search again</button> <!-- false: do not expand query -->
+		</div>
+	</div>
+	<div id="graphDIV"></div>
+	<div id="categoryDIV"></div>
+</div>
+
+
+
+
+<div id="slider">
+  <label for="summarySlider">minder detail</label>
+  <input type="range" id="summarySlider">
+  <label for="summarySlider">meer detail</label>
+</div>
+<div id="logos">
+
+
+  <img src="./static/resources/logo-TNO.gif.png" height=50px>
+  <img src="./static/resources/gist_logo.jpg" height=60px>
+
+<!--
+  <img src="./resources/logo-TNO.gif.png" height=50px>
+  <img src="./resources/gist_logo.jpg" height=60px>
+-->
+
+</div>
+
+<div id="messageDIV"></div>
+
+<script src="./static/lib/d3.min.js"></script>
+<script src="./static/lib/jquery-3.1.1.min.js"></script>
+<script src="./static/js/server.js"></script>
+<script src="./static/js/graph.js"></script>
+<script src="./static/js/search.js"></script>
+<script src="./static/js/message.js"></script>
+<script src="./static/js/categories.js"></script>
+
+<!--
+<script src="./lib/d3.min.js"></script>
+<script src="./lib/jquery-3.1.1.min.js"></script>
+<script src="./js/server.js"></script>
+<script src="./js/graph.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/message.js"></script>
+<script src="./js/categories.js"></script>
+-->
+
+<script>
+
+$(window).resize(updateGraphSize);
+
+var zoom = d3.behavior.zoom()
+    .scaleExtent([0.1, 10])
+    .on("zoom", zoomed);
+
+var graphWindowSVG = d3.select("#graphDIV")
+    .append("svg")
+    .attr("width", "100%")
+    .attr("height", "100%");
+
+var zoomAndPanG = graphWindowSVG
+    .append("g")
+		.attr("id","zoomAndPanG")
+		.call(zoom);
+
+var zoomAndPanRect = zoomAndPanG
+    .append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .style("fill", "none")
+    .style("pointer-events", "all");
+
+var graphG = zoomAndPanG.append("g"); //in this group we add the graph's nodes and links
+
+var MAX_THRESHOLD = 2;
+var currentThreshold = MAX_THRESHOLD; //threshold for showing summarized messages
+
+$("#summarySlider")
+  .attr("min",0)
+  .attr("max",MAX_THRESHOLD)
+  .attr("step",0.05)
+  .val(MAX_THRESHOLD-currentThreshold);
+
+$("#summarySlider").change(function() {
+  currentThreshold = MAX_THRESHOLD - $(this).val(); //to the right: lower threshold, more detail
+  //refresh messages
+  drawMessages();
+});
+
+//init corpus switch menu
+var corpusFile = "static/config/corpora.json";
+//var corpusFile = "config/corpora.json";
+
+d3.json(corpusFile, function(data) {
+  d3.select("#corpusSelect").selectAll("option")
+    .data(data)
+    .enter()
+    .append("option")
+    .attr("value", function(d) { return d.id })
+    .text(function(d) { return d.label});
+})
+
+
+initGraph(graphG);
+updateGraphSize();
+
+function updateGraphSize() {
+
+  zoomAndPanG.attr("transform", "translate(" + (-zoomAndPanG.node().getBBox().width / 2) + "," + (-zoomAndPanG.node().getBBox().height / 2) + ")");
+  zoomAndPanRect.attr("x",(zoomAndPanG.node().getBBox().width / 2))
+                .attr("y",(zoomAndPanG.node().getBBox().height / 2));
+  setGraphSize(zoomAndPanG.node().getBBox().width, zoomAndPanG.node().getBBox().height);
+}
+
+function zoomed() {
+  dragStarted = true;
+  graphG.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  updateZoomLevel(d3.event.scale);
+}
+
+//when enter is pressed in query field, perform search
+$(document).ready(function(){
+    $('#queryINPUT').keypress(function(e){
+      if(e.keyCode==13)
+      $('#searchBTN').click();
+    });
+});
+
+
+</script>

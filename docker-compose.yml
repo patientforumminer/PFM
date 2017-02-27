@@ -1,0 +1,29 @@
+version: '2'
+services:
+    elasticsearch: 
+        container_name: espfm
+        image: elasticsearch:2.4.1 
+        ports: 
+            - "9200:9200" 
+            - "9300:9300" 
+           
+    pfmfill-data: 
+        build: 
+            context: live_demo/
+            dockerfile: Dockerfile-data
+        links: 
+            - elasticsearch 
+        depends_on:
+            - elasticsearch
+        
+    pfm: 
+        build: live_demo/gistsearch/
+        ports: 
+            - "5000:5000"
+        links: 
+            - elasticsearch 
+        depends_on:
+            - elasticsearch
+        restart: always
+
+

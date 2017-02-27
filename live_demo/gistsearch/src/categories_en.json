@@ -1,0 +1,21 @@
+[
+  {"id":"medicines", "label":"Medicines"},
+  {"id":"neoplastic process", "label":"Neoplastic Process"},
+  {"id":"cell or molecular dysfunction", "label":"Molecular Dysfunction"},
+  {"id":"gene or genome", "label":"Gene / Genome"},
+  {"id":"disease or syndrome", "label":"Disease or Syndrome"},
+  {"id":"therapeutic or preventive procedure", "label":"Therapeutic / Preventive"},
+  {"id":"organic chemical,pharmacologic substance", "label":"Organic Chemical"},
+  {"id":"medical device", "label":"Medical Device"},
+  {"id":"body part, organ, or organ component", "label":"Body Part / Organ"},
+  {"id":"biologically active substance,pharmacologic substance", "label":"Biologically Active Substance,Pharmacologic Substance"},
+  {"id":"amino acid, peptide, or protein,immunologic factor,pharmacologic substance", "label":"Amino Acid, Peptide, or Protein,Immunologic Factor,Pharmacologic Substance"},
+  {"id":"amino acid, peptide, or protein,pharmacologic substance", "label":"Amino Acid, Peptide, or Protein,Pharmacologic Substance"},
+  {"id":"pharmacologic substance", "label":"Pharmacologic Substance"},
+  {"id":"sign or symptom", "label":"Sign or Symptom"},
+  {"id":"food", "label":"Food"},
+  {"id":"diagnostic procedure", "label":"Diagnostic Procedure"},
+  {"id":"supplements", "label":"Supplements"},
+  {"id":"finding", "label":"Finding"}
+  ]
+  

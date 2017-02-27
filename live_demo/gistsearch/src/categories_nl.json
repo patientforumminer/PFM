@@ -1,0 +1,20 @@
+[
+{"id":"Lichaamsdelen & Organen", "label":"Lichaamsdelen & Organen"},
+{"id":"Diagnostiek", "label":"Diagnostiek"},
+{"id":"Ziekte of Syndroom", "label":"Ziekte of Syndroom"},
+{"id":"voedsel", "label":"voedsel"},
+{"id":"letsel", "label":"letsel"},
+{"id":"mentale/gedrags dysfunctie", "label":"mentale/gedrags dysfunctie"},
+{"id":"mentaal proces", "label":"mentaal proces"},
+{"id":"neoplastisch proces", "label":"neoplastisch proces"},
+{"id":"menselijke functies", "label":"menselijke functies"},
+{"id":"pathologieën", "label":"pathologieën"},
+{"id":"vitaminen, hormonen, medicijnen, etc.", "label":"vitaminen, hormonen, medicijnen, etc."},
+{"id":"giftige stoffen", "label":"giftige stoffen"},
+{"id":"symptomen", "label":"symptomen"},
+{"id":"behandelingen", "label":"behandelingen"},
+{"id":"gewicht", "label":"gewicht"},
+{"id":"Activiteit", "label":"Activiteit"},
+{"id":"Biomedisch material", "label":"Biomedisch material"},
+{"id":"beroep/discipline", "label":"beroep/discipline"}
+]

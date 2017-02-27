@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+    <form action="{{ url_for('send_query') }}" method=post class=add-entry>
+      <dl>
+        <dt>Query:
+        <dd><input type=text size=30 name=query>
+        <dd><input type=submit value=Search>
+      </dl>
+    </form>
+  <ul class=entries>
+  {% for hit in searchresult.hits %}
+    <li><h2>Message: {{ hit.message._id }} - {{ hit.message._source.time|safe }}</h2>{{ hit.message._source.text|safe }}
+    <ul class=entries>
+    {% for c in hit.comments %}
+      <li><h2>Comment: {{ c._id }}</h2> {{ c._source.text|safe }}
+    {% endfor %}
+    </ul>
+    <br><hr><br>
+  {% endfor %}
+  </ul>
+{% endblock %}

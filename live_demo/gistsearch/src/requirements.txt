@@ -1,0 +1,6 @@
+numpy
+scipy
+gensim
+scikit-learn
+elasticsearch
+flask
